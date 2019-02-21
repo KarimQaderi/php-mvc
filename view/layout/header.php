@@ -65,7 +65,8 @@
         .m-b-md {
             margin-bottom: 30px;
         }
-        .row{
+
+        .row {
             padding: 5px;
             border-bottom: 1px solid #000;
         }
@@ -80,7 +81,25 @@
     </div>
 
     <div class="content">
-        <form action="/add" method="POST" >
+
+        <div class="massage">
+            <?php
+                if(\App\lib\Session\Session::has('massage'))
+                {
+                    if(is_array(\App\lib\Session\Session::get('massage')))
+                    {
+                        foreach(\App\lib\Session\Session::get('massage') as $massage)
+                            echo "<li>" . $massage . "</li>";
+                    }
+                    else
+                    {
+                        echo "<li>" . \App\lib\Session\Session::get('massage') . "</li>";
+                    }
+                }
+            ?>
+        </div>
+
+        <form action="/add" method="POST">
             <label for="">
                 Name :
                 <input type="text" name="name">

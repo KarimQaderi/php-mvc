@@ -2,18 +2,21 @@
 
     namespace App\inc;
 
-    class DB
+    use App\lib\Config\Config;
+
+    class DB extends Singleton
     {
 
         private $host , $username , $passwd , $dbname , $driver;
 
-        function __construct($host , $username , $passwd , $dbname , $driver = 'PDO')
+
+        function __construct()
         {
-            $this->host = $host;
-            $this->username = $username;
-            $this->passwd = $passwd;
-            $this->dbname = $dbname;
-            $this->driver = $driver;
+            $this->host = Config::get('Database.host');
+            $this->username = Config::get('Database.username');
+            $this->passwd = Config::get('Database.passwd');
+            $this->dbname = Config::get('Database.dbname');
+            $this->driver = Config::get('Database.driver');
         }
 
         /**
@@ -21,7 +24,7 @@
          *
          * @return mixed
          */
-        function connect()
+        public function connect()
         {
             switch($this->driver){
                 case 'mysqli':
@@ -42,5 +45,6 @@
 
             return $DB;
         }
+
 
     }

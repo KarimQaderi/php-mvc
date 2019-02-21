@@ -4,5 +4,9 @@
       "App\\": "App/"
     },
     "files": ["App/helper.php"]
+  },
+  "require": {
+    "ext-pdo": "*",
+    "ext-mysqli": "*"
   }
 }
