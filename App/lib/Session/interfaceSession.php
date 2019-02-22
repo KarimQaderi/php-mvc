@@ -18,9 +18,10 @@
          * Get item
          *
          * @param $name
+         * @param null $default
          * @return mixed
          */
-        public static function get($name);
+        public static function get($name , $default = null);
 
         /**
          * Get All item

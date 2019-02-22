@@ -1,6 +1,6 @@
 <?php
 
-    namespace App\inc\DB;
+    namespace App\lib\DB\DB;
     abstract class AbstractDB implements InterfaceDB
     {
         protected $table;

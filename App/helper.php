@@ -1,18 +1,23 @@
 <?php
 
+    function basePath($path = null)
+    {
+        return path .($path ? DIRECTORY_SEPARATOR.$path : $path);
+    }
+
     function appPath($path = null)
     {
-        return path . '/' . $path;
+        return basePath('App'.($path ? DIRECTORY_SEPARATOR.$path : $path)) ;
     }
 
     function storagePath($path = null)
     {
-        return appPath('storage/' . $path);
+        return basePath('storage' .($path ? DIRECTORY_SEPARATOR.$path : $path));
     }
 
     function configPath($file = null)
     {
-        return appPath('Config/' . $file);
+        return basePath('Config/' . $file);
     }
 
     function dump($dump)

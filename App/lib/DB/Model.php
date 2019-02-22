@@ -1,8 +1,9 @@
 <?php
 
-    namespace App\inc;
+    namespace App\lib\DB;
 
-    use App\inc\DB\AbstractDB;
+
+    use App\lib\DB\DB\AbstractDB;
 
     class Model extends AbstractDB
     {

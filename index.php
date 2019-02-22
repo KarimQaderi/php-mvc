@@ -1,10 +1,5 @@
 <?php
 
-    use App\Controller\PostController;
-    use App\inc\DB;
-    use App\inc\Route;
-    use App\lib\Config\Config;
-
     require 'vendor/autoload.php';
 
     define('path' , __DIR__);
@@ -15,16 +10,13 @@
 
     global $DB;
 
-    $DB = (DB::getInstance())->connect();
+    $DB = (\App\lib\DB\DB::getInstance())->connect();
 
-    $route = new Route();
+    // include router
+    include_once basePath('routes/web.php');
 
-    $route->add('/' , PostController::class , 'index');
-    $route->add('/add' , PostController::class , 'Add');
-    $route->add('/post' , PostController::class , 'Post');
 
-    $route->run();
-
+    // forget All Flash Session
     \App\lib\Session\Session::forgetAllFlash();
 
 ?>

@@ -3,7 +3,7 @@
     namespace App\Controller;
 
     use App\inc\Controller;
-    use App\inc\DB;
+    use App\lib\Auth\Auth;
     use App\lib\Cache\Cache;
     use App\lib\Config\Config;
     use App\lib\Cookie\Cookie;
@@ -15,46 +15,44 @@
         function index()
         {
 
+            Auth::login('admin' , '123456');
 
-            dump(Config::get('Config.cache', 'default'));
+            dump(Config::get('Config.cache' , 'default'));
 
-            Cookie::put('ddsshhh','shhss',1);
+            Cookie::put('ddsshhh' , 'shhss' , 1);
 //            Cookie::forget('ddsshhh');
             dump(Cookie::get('ddsshhh'));
 
 
-
-            Cache::remember('post','1',function(){
+            Cache::remember('post' , '1' , function(){
                 return 'ssgggggggggghhhhhhhhhhhhhhs';
             });
 
-            Cache::setDriver('file')->add('ffffffff','rtyrty11111',1);
+            Cache::setDriver('file')->add('ffffffff' , 'rtyrty11111' , 1);
 
             dump(Cache::get('ffffffff'));
             dump(Cache::get('post'));
 
-            Cookie::put('test' , "OK Test",2);
-            Cookie::put('tesadst' , 'OK Test',3);
-
+            Cookie::put('test' , "OK Test" , 2);
+            Cookie::put('tesadst' , 'OK Test' , 3);
 
 
             Session::put('test' , 'OK Test');
             Session::put('test-2' , 'OK Test-2');
 
-            Session::flash('massage','LLFF');
+            Session::flash('massage' , 'LLFF');
             dump(Cookie::all());
             dump(Session::all());
             dump(Session::has('test'));
             Session::forget('test');
             Cookie::forget('test');
             dump(Session::has('test'));
-            Session::flash('fffffff','LytutyutyutyuLFF');
+            Session::flash('fffffff' , 'LytutyutyutyuLFF');
 
 
             dump(Cookie::all());
 
             dump(Session::all());
-
 
 
             Post::make()->find('2')->update([
@@ -88,5 +86,16 @@
         {
 
             dd($_POST);
+        }
+
+        function Show($id)
+        {
+            if(Auth::guest())
+                dump('شما مهمان هستید');
+            else
+                dump('شما لاگین شدید');
+
+            dump('Welcome ' . Auth::getUserName());
+            dd($id);
         }
     }

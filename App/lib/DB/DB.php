@@ -1,7 +1,8 @@
 <?php
 
-    namespace App\inc;
+    namespace App\lib\DB;
 
+    use App\inc\Singleton;
     use App\lib\Config\Config;
 
     class DB extends Singleton

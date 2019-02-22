@@ -1,6 +1,6 @@
 <?php
 
-    namespace App\inc\DB;
+    namespace App\lib\DB\DB;
 
     class PDO extends AbstractDB
     {
@@ -28,12 +28,13 @@
             return $this;
         }
 
-        public function where($field , $value , $type = '=' , $betweenWhere = '&')
+        public function where($field , $value , $type = '=' , $betweenWhere = '&&')
         {
             /* @var \PDO $DB */
             global $DB;
 
-            if(strpos($this->Where , ' where ') == null)
+
+            if(strpos($this->Where , ' where ') === false)
                 $this->Where .= " where ";
             else
                 $this->Where .= " $betweenWhere ";
@@ -64,10 +65,29 @@
             if(!$this->hasTable($this->getTable()))
                 die("Not Found Table [{$this->getTable()}]");
 
-//            dd($this->Query);
+//            dd($this->getQuery());
 
-            return $DB->query($this->getQuery())->fetchAll();
+            return $this->BuildQuery($this->getQuery())->fetchAll();
         }
+
+
+        public function first()
+        {
+            $this->select();
+
+            /** @var \PDO $DB */
+            global $DB;
+
+            if(!$this->hasTable($this->getTable()))
+                die("Not Found Table [{$this->getTable()}]");
+
+            $this->limit(1);
+//            dd($this->getQuery());
+
+            return $this->BuildQuery($this->getQuery())->fetch();
+        }
+
+
 
         public function hasTable($table)
         {
@@ -137,6 +157,7 @@
                     $stmt->errorInfo()
                 ));
 
+            return $stmt;
         }
 
         private function ConverDataArray(array $data)

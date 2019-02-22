@@ -1,5 +1,5 @@
 <?php
-    namespace App\inc\DB;
+    namespace App\lib\DB\DB;
 
     interface InterfaceDB
     {

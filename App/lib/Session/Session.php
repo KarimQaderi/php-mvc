@@ -22,11 +22,12 @@
          * Get item
          *
          * @param $name
+         * @param null $default
          * @return mixed
          */
-        public static function get($name)
+        public static function get($name , $default = null)
         {
-            return $_SESSION[$name];
+            return isset($_SESSION[$name])? $_SESSION[$name] : $default;
         }
 
         /**
