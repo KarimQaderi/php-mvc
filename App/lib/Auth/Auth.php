@@ -44,6 +44,18 @@
         }
 
         /**
+         * get first user
+         *
+         * @param $username
+         * @param $password
+         * @return mixed
+         */
+        private static function getUser($username , $password)
+        {
+            return User::make()->where('username' , $username)->where('password' , md5($password))->first();
+        }
+
+        /**
          * check user guest or login
          *
          * @return bool
@@ -73,10 +85,6 @@
             return Session::get('login_user_id');
         }
 
-        private static function getUser($username , $password)
-        {
-            return User::make()->where('username' , $username)->where('password' , md5($password))->first();
-        }
 
         /**
          * logout user
@@ -84,7 +92,7 @@
         public static function logout()
         {
             Session::forget('login_username');
-            Session::forget('login_user_id' );
+            Session::forget('login_user_id');
         }
 
     }

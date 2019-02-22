@@ -15,6 +15,8 @@
         function index()
         {
 
+            dd(Post::make()->with(['user'])->first());
+
             Auth::login('admin' , '123456');
 
             dump(Config::get('Config.cache' , 'default'));

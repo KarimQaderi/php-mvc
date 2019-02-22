@@ -4,6 +4,8 @@
 
     class PDO extends AbstractDB
     {
+        use Relation;
+
         private $bindValue = [];
 
         public function all($column = '*')
@@ -88,7 +90,6 @@
         }
 
 
-
         public function hasTable($table)
         {
             /** @var \PDO $DB */
@@ -105,7 +106,7 @@
 
             $data_string = $this->ConverDataArray($data);
 
-            return $this->BuildQuery("update {$this->getTable()} set " . $data_string . $this->Where . $this->Limit,$data);
+            return $this->BuildQuery("update {$this->getTable()} set " . $data_string . $this->Where . $this->Limit , $data);
 
         }
 
@@ -175,7 +176,7 @@
 
         private function getQuery()
         {
-            return $this->Query . $this->Where . $this->Limit;
+            return $this->Query . $this->Where . $this->getWith() . $this->Limit;
         }
 
     }
